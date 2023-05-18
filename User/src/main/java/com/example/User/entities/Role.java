@@ -1,11 +1,9 @@
 package com.example.User.entities;
 
-
-import java.util.HashSet;
 import java.util.Set;
 
+
 import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,17 +28,11 @@ public class Role extends BaseEntity{
     private String name;
 
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users = new HashSet<>();
-
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-        name = "user_roles",
-        joinColumns = @JoinColumn(name = "role_id"),
-        inverseJoinColumns = @JoinColumn(name = "permission_id")
+        name = "roles_perms"
     )
-    private Set<Permission> permissions = new HashSet<>();
+    private Set<Permission> permissions ;
 
 
     public String getName() {
@@ -53,15 +45,6 @@ public class Role extends BaseEntity{
     }
 
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
 
     public Set<Permission> getPermissions() {
         return permissions;
@@ -71,6 +54,8 @@ public class Role extends BaseEntity{
     public void setPermissions(Set<Permission> permissions) {
         this.permissions = permissions;
     }
+    
+
 
 
     

@@ -1,5 +1,6 @@
 package com.example.User.Dto;
 
+import java.util.Set;
 
 public class UserDto {
 
@@ -8,19 +9,23 @@ public class UserDto {
 
     private String firstname;
 
-    public UserDto(Long id, String firstname, String lastname, String email) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-    }
+
 
     private String lastname;
 
     private String email;
 
-    public UserDto() {
+    private Set<RoleDto> roleDto;
 
+    public UserDto(Long id, String firstname, String lastname, String email, Set<RoleDto> roleDto) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.roleDto = roleDto;
+    }
+
+    public UserDto() {
     }
 
     public Long getId() {
@@ -54,4 +59,16 @@ public class UserDto {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Set<RoleDto> getRoleDto() {
+        return roleDto;
+    }
+
+    public void setRoleDto(Set<RoleDto> roleDto) {
+        this.roleDto = roleDto;
+    }
+
+
+
+    
 }

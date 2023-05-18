@@ -1,10 +1,7 @@
 package com.example.User.entities;
 
-import java.util.HashSet;
+
 import java.util.Set;
-
-
-
 
 import jakarta.persistence.*;
 
@@ -23,19 +20,16 @@ public class User extends BaseEntity{
     @Column(name = "email")
     String email;
 
-   
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "usersss_roles"
+       
+    )
+    private Set<Role> roles ;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "role_permissions", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
-    private Set<Permission> permissions = new HashSet<>();
 
  
-  
-
     public String getFirstname() {
         return firstname;
     }
@@ -58,6 +52,14 @@ public class User extends BaseEntity{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
    
